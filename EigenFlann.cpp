@@ -71,7 +71,7 @@ int main(int argc, char** argv)
 
 
 
-#pragma omp parallel for 
+#pragma omp parallel for collapse(2)
     for (auto j = 0; j < mat.rows(); j++) {
         std::vector<double> query_pt = { mat(j,0), mat(j,1), mat(j,2) };
         resultSet.init(&ret_indexes[0], &out_dists_sqr[0]);
@@ -79,6 +79,7 @@ int main(int argc, char** argv)
 
         for (int i = 0; i < resultSet.size(); i++)
         {
+
             if (checkmat(j, ret_indexes[i]) == 0) {
 
                 checkmat(ret_indexes[i], j) += 1;
